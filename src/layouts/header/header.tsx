@@ -20,16 +20,13 @@ import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
-import Button from '@/components/ui/button';
-import { PlusCircle } from '@/components/icons/plus-circle';
-
 function NotificationButton() {
   const router = useRouter();
   return (
     <AnchorLink
       href={
         router.pathname === routes.notification
-          ? routes.home
+          ? routes.learn
           : routes.notification
       }
     >
@@ -88,19 +85,9 @@ function HeaderRightArea() {
   return (
     <div className="flex flex-col items-end gap-6 xl:gap-7 2xl:gap-8 3xl:gap-10">
       <div className="relative mt-5 flex shrink-0 items-center justify-end gap-4 gap-3 2xl:gap-8">
-        <NotificationButton />
-        <WalletMultiButton className="h-10 rounded-full bg-new-blue  2xl:h-12" />
+        {/* <NotificationButton /> */}
+        <WalletMultiButton className="gradient-border-box border-0.5 h-10 rounded-full bg-newdark 2xl:h-12" />
       </div>
-      {router.pathname === '/projects' && (
-        <AnchorLink href="/incentivize-contributors">
-          <Button shape="rounded" size="small" color="info">
-            <div className="flex items-center gap-2">
-              <PlusCircle />
-              <div>Create a Project</div>
-            </div>
-          </Button>
-        </AnchorLink>
-      )}
     </div>
   );
 }
@@ -136,7 +123,15 @@ export default function Header({ className }: { className?: string }) {
     <nav
       className={cn(
         'relative top-0 right-0 z-30 h-[7rem] w-full transition-all duration-300 lg:h-[8rem] 2xl:h-[11rem]',
+        // isMounted && windowScroll.y
+        //   ? 'bg-gradient-to-b from-dark to-dark/80 shadow-card backdrop-blur'
+        //   : '',
         {
+          '!h-[5rem]':
+            router.pathname.includes('/issues/') ||
+            router.pathname.includes('/issues') ||
+            router.pathname.includes('/projects') ||
+            router.pathname.includes('/roadmaps'),
           '!hidden': router.pathname === '/learn',
         },
         className
@@ -144,7 +139,7 @@ export default function Header({ className }: { className?: string }) {
     >
       <div className="flex h-full items-start justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
-          <div className="mr-5 block lg:hidden">
+          <div className="m-5 ml-0 block lg:hidden">
             <Hamburger
               isOpen={false}
               variant="solid"
@@ -158,57 +153,12 @@ export default function Header({ className }: { className?: string }) {
           >
             <Logo />
           </div> */}
-          {router.pathname === '/home' && (
-            <PageHeader
-              title="welcome"
-              description={[
-                "we're still in beta and on devnet!",
-                'thank you for supporting open-source!',
-              ]}
-            />
-          )}
-          {router.pathname === '/projects' && (
-            <PageHeader
-              title="projects"
-              description={[
-                'claim the tokens for your own project.',
-                'explore what other projects are working on and how communities are working.',
-              ]}
-            />
-          )}
           {router.pathname === '/swap' && (
             <PageHeader
               title="swap"
               description={[
                 'purchase and HODL your favorite tokens.',
                 'swap with project tokens of new projects that you want to support.',
-              ]}
-            />
-          )}
-          {router.pathname === '/roadmaps' && (
-            <PageHeader
-              title="roadmaps"
-              description={[
-                'plan how projects pan out as a community.',
-                'use your staked tokens to drive the direction of your favorite projects.',
-              ]}
-            />
-          )}
-          {router.pathname === '/issues' && (
-            <PageHeader
-              title="issues"
-              description={[
-                'solve issues to earn tokens.',
-                'stake tokens on issues to incentivize contributors.',
-              ]}
-            />
-          )}
-          {router.pathname === '/incentivize-contributors' && (
-            <PageHeader
-              title="create a project"
-              description={[
-                'tokenize your github repository.',
-                'onboard new contributors on your project seamlessly.',
               ]}
             />
           )}
@@ -221,7 +171,6 @@ export default function Header({ className }: { className?: string }) {
               ]}
             />
           )}
-          {router.pathname === '/jobs' && <PageHeader title="jobs" />}
         </div>
         <HeaderRightArea />
       </div>

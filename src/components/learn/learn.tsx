@@ -154,7 +154,7 @@ const Learn: React.FC<LearnProps> = ({}) => {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://api-v1.defi-os.com/learn/search',
+      url: `${process.env.NEXT_PUBLIC_DEFIOS_SERVER}/learn/search`,
       headers: {
         Authorization: firebase_jwt,
         'Content-Type': 'application/json',
@@ -210,7 +210,7 @@ const Learn: React.FC<LearnProps> = ({}) => {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'https://api-v1.defi-os.com/learn/search/cached',
+      url: `${process.env.NEXT_PUBLIC_DEFIOS_SERVER}/learn/search/cached`,
       headers: {
         Authorization: firebase_jwt,
         'Content-Type': 'application/json',
@@ -245,7 +245,7 @@ const Learn: React.FC<LearnProps> = ({}) => {
 
   const getSpotlight = async () => {
     axios
-      .get('https://api-v1.defi-os.com/daily/featured?daily_featured=repo', {
+      .get(`${process.env.NEXT_PUBLIC_DEFIOS_SERVER}/daily/featured?daily_featured=repo`, {
         headers: {
           Authorization: firebase_jwt,
           'Content-Type': 'application/json',
@@ -315,7 +315,6 @@ const Learn: React.FC<LearnProps> = ({}) => {
                         learnRes.search_results.length) *
                       100,
                   }}
-                  item="issues"
                 />
               </div>
             )}
@@ -379,17 +378,15 @@ const Learn: React.FC<LearnProps> = ({}) => {
                   You seem to have dropped off midway during your last web
                   development learning path.
                 </div>
-                <Button
+                <div
+                  className="bg-newDark flex w-fit cursor-pointer items-center justify-center rounded-full border-2 border-primary py-1 px-8 text-sm font-semibold text-primary xl:text-base 3xl:text-lg"
                   onClick={handleResume}
-                  size="small"
-                  shape="rounded"
-                  color="info"
                 >
                   <div className="flex items-center gap-2">
                     <div>Resume Now</div>
                     <ArrowRightIcon className="h-5 w-5" />
                   </div>
-                </Button>
+                </div>
               </div>
             )}
         </div>
