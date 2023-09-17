@@ -6,18 +6,18 @@ import Input from '@/components/ui/forms/input';
 interface HeaderLandingProps {}
 
 export const HeaderLanding: React.FC<HeaderLandingProps> = ({}) => {
-  const [email, setEmail] = useState('');
-  const onSubmitHandler = () => {
-    if (email === '' || !email.includes('@')) return;
-    axios
-      .post(
-        `https://api-v1.defi-os.com/waitlist/jobs?email=${email}&wl_type=jobs`
-      )
-      .then((res) => {
-        setEmail('');
-      })
-      .catch((err) => console.log(err));
-  };
+  // const [email, setEmail] = useState('');
+  // const onSubmitHandler = () => {
+  //   if (email === '' || !email.includes('@')) return;
+  //   axios
+  //     .post(
+  //       `https://api-v1.defi-os.com/waitlist/jobs?email=${email}&wl_type=jobs`
+  //     )
+  //     .then((res) => {
+  //       setEmail('');
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
   return (
     <div className="z-[20] mt-16 flex w-screen flex-col items-center">
       <div className="text-center text-5xl font-black text-white 2xl:text-6xl">
@@ -32,8 +32,8 @@ export const HeaderLanding: React.FC<HeaderLandingProps> = ({}) => {
         incentivize any open source project. <br />
       </div>
       <div className="mt-12">
-        {/* <SigninBtn /> */}
-        <div className="flex gap-4">
+        <SigninBtn />
+{/*         <div className="flex gap-4">
           <Input
             type="email"
             placeholder="Enter your email"
@@ -48,7 +48,7 @@ export const HeaderLanding: React.FC<HeaderLandingProps> = ({}) => {
           >
             Join Waitlist
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
