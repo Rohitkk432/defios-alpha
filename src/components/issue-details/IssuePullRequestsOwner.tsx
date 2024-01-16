@@ -170,7 +170,10 @@ export const IssuePullRequestsOwner: React.FC<IssuePullRequestsOwnerProps> = ({
   const handleAcceptPR = (prData: any) => {
     dispatch(onLoading('Merging pull request...'));
     setIsMerging(true);
-    acceptPr(new PublicKey(prData.issue_pr_account))
+    acceptPr(
+      new PublicKey(prData.issue_pr_account),
+      new PublicKey(issueData?.issue_account)
+    )
       .then((res) => {
         const pullApiUrl = prData.issue_pr_link
           .replace('https://github.com/', '')
@@ -265,10 +268,7 @@ export const IssuePullRequestsOwner: React.FC<IssuePullRequestsOwnerProps> = ({
           <div className="flex w-full items-center justify-between text-3xl xl:text-4xl 3xl:text-5xl">
             <div className="textShadowWhite">total rewards: </div>
             <div className="textShadowGreen text-new-green">
-              {Math.round(
-                (issueData?.issue_stake_amount * 100) /
-                  10 ** tokenDetails?.decimals
-              ) / 100}
+              {issueData?.issue_stake_amount}
             </div>
           </div>
           <div className="my-8 flex flex-col items-center gap-2 text-center text-base xl:text-lg 3xl:text-xl">
@@ -371,7 +371,7 @@ export const IssuePullRequestsOwner: React.FC<IssuePullRequestsOwnerProps> = ({
                   return (
                     <PRBox
                       prData={item}
-                      totalPower={tokenDetails?.totalPower || 0}
+                      totalPower={issueData?.issue_stake_amount}
                       key={idx}
                       voted={false}
                       votingPower={0}
@@ -414,7 +414,7 @@ export const IssuePullRequestsOwner: React.FC<IssuePullRequestsOwnerProps> = ({
                       return (
                         <PRBox
                           prData={item}
-                          totalPower={tokenDetails?.totalPower || 0}
+                          totalPower={issueData?.issue_stake_amount}
                           key={idx}
                           voted={false}
                           votingPower={0}
@@ -438,7 +438,7 @@ export const IssuePullRequestsOwner: React.FC<IssuePullRequestsOwnerProps> = ({
                       return (
                         <PRBox
                           prData={item}
-                          totalPower={tokenDetails?.totalPower || 0}
+                          totalPower={issueData?.issue_stake_amount}
                           key={idx}
                           voted={false}
                           votingPower={0}

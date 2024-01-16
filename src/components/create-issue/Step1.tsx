@@ -181,7 +181,6 @@ export const Step1: React.FC<Step1Props> = ({ setStep }) => {
   const [issueType, setIssueType] = useState<'import' | 'create'>('create');
 
   const [tokenIncentive, setTokenIncentive] = useState(0);
-  const [usdcIncentive, setUsdcIncentive] = useState(0);
 
   const { data: session } = useSession();
   const dispatch = useAppDispatch();
@@ -342,7 +341,6 @@ export const Step1: React.FC<Step1Props> = ({ setStep }) => {
             : step1Data.tags.join('')
         );
         setTokenIncentive(step1Data.tokenIncentive);
-        setUsdcIncentive(step1Data.usdcIncentive);
         setIssueType(step1Data.issueType);
       } else {
         if (issueType === 'import') {
@@ -382,13 +380,13 @@ export const Step1: React.FC<Step1Props> = ({ setStep }) => {
           selectedProject: selectedProject,
           tokenSymbol: selectedProject?.project_token?.token_symbol,
           tokenName: selectedProject?.project_token?.token_name,
+          tokenDecimals: selectedProject?.project_token?.token_decimals,
           tokenImgLink: selectedProject?.project_token?.token_image_url,
           issueType: 'create',
           issueTitle: issueSearch,
           issueDescription: issueDescription,
           selectedIssue: selectedIssue,
           tokenIncentive: tokenIncentive,
-          usdcIncentive: usdcIncentive,
           tags: TagsRefined,
           issueNumber: undefined,
           issueLink: undefined,
@@ -409,13 +407,13 @@ export const Step1: React.FC<Step1Props> = ({ setStep }) => {
           selectedProject: selectedProject,
           tokenSymbol: selectedProject?.project_token?.token_symbol,
           tokenName: selectedProject?.project_token?.token_name,
+          tokenDecimals: selectedProject?.project_token?.token_decimals,
           tokenImgLink: selectedProject?.project_token?.token_image_url,
           issueType: 'import',
           issueTitle: issueSearch,
           issueDescription: issueDescription,
           selectedIssue: selectedIssue,
           tokenIncentive: tokenIncentive,
-          usdcIncentive: usdcIncentive,
           tags: TagsRefined,
           issueNumber: selectedIssue.number,
           issueLink: selectedIssue.html_url,
@@ -633,22 +631,6 @@ export const Step1: React.FC<Step1Props> = ({ setStep }) => {
             placeholder="0"
             value={tokenIncentive}
             onChange={(e) => setTokenIncentive(parseFloat(e.target.value))}
-            type="number"
-            inputClassName="text-2xs xl:text-xs 3xl:text-sm"
-          />
-        </div>
-        <div className="flex w-[55%] flex-col gap-2">
-          <div className="flex items-center gap-3 uppercase ">
-            <div>
-              USDC Incentive{' '}
-              <div className="normal inline text-gray-400">(optional)</div>
-            </div>
-            <QuestionMarkCircleIcon className="h-5 w-5 " />
-          </div>
-          <Input
-            placeholder="0"
-            value={usdcIncentive}
-            onChange={(e) => setUsdcIncentive(parseFloat(e.target.value))}
             type="number"
             inputClassName="text-2xs xl:text-xs 3xl:text-sm"
           />

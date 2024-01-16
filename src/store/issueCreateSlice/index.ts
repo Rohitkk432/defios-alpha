@@ -8,13 +8,13 @@ export interface step1Props {
   selectedProject: any;
   tokenSymbol: string;
   tokenName: string;
+  tokenDecimals: number;
   tokenImgLink: string;
   issueType: 'create' | 'import';
   issueTitle: string;
   issueDescription: string;
   selectedIssue: any;
   tokenIncentive: number;
-  usdcIncentive: number;
   tags: string[];
   issueNumber: number | undefined;
   issueLink: string | undefined;
@@ -38,13 +38,13 @@ const initialState: creationState = {
     selectedProject: undefined,
     tokenSymbol: '',
     tokenName: '',
+    tokenDecimals: 0,
     tokenImgLink: '',
     issueType: 'create',
     issueTitle: '',
     issueDescription: '',
     selectedIssue: undefined,
     tokenIncentive: 0,
-    usdcIncentive: 0,
     tags: [],
     issueNumber: undefined,
     issueLink: undefined,
@@ -73,13 +73,13 @@ export const issueCreate = createSlice({
         selectedProject: undefined,
         tokenSymbol: '',
         tokenName: '',
+        tokenDecimals: 0,
         tokenImgLink: '',
         issueType: 'create',
         issueTitle: '',
         issueDescription: '',
         selectedIssue: undefined,
         tokenIncentive: 0,
-        usdcIncentive: 0,
         tags: [],
         issueNumber: undefined,
         issueLink: undefined,
